@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">-->
+    <beans xmlns="http://www.springframework.org/schema/beans"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:context="http://www.springframework.org/schema/context"
+           xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans.xsd
+                        http://www.springframework.org/schema/context
+                        http://www.springframework.org/schema/context/spring-context.xsd">
+    <context:annotation-config></context:annotation-config>
+   <!-- Inversion of control implementation. spring create objects -->
+    <bean  id = "artificial" class ="visi.spring.ioc.ArtificialIntelligence"></bean>
+    <bean  id = "machine" class ="visi.spring.ioc.MachineLearning"></bean>
+    <bean  id = "Course" class ="visi.spring.ioc.MachineLearning"></bean>
+
+    <!-- Literal value dependency injection. setter injection using property tag -->
+    <bean  id = "Job" class ="visi.spring.dependency.injection.Job">
+        <property name="companyName" value="Google"/>
+        <property name="id" value="20"/>
+    </bean>
+
+    <bean  id = "secondJob" class ="visi.spring.dependency.injection.Job">
+        <property name="companyName" value="FaceBook"/>
+        <property name="id" value="10"/>
+    </bean>
+    <!-- Literal value dependency injection. constructor injection using constructor-arg tag... type is used to define type of the argument -->
+    <bean  id = "thirdJob" class ="visi.spring.dependency.injection.Job">
+        <constructor-arg name="companyName" value="Amazon"/>
+        <constructor-arg name="id" value="11" type="int"/>
+    </bean>
+
+    <bean  id = "fourthJob" class ="visi.spring.dependency.injection.Job">
+        <constructor-arg name="companyName" value="Micorosoft"/>
+    </bean>
+    <!-- object dependency injection. setter injection using property tag... object is created inside property tag -->
+    <bean id="revamp" class="visi.spring.dependency.injection.FirstProject"></bean>
+    <bean id="cloudMigration" class="visi.spring.dependency.injection.SecondProject"></bean>
+
+    <bean  id = "fifthJob" class ="visi.spring.dependency.injection.Job">
+        <property name="project" ref="revamp"/>
+    </bean>
+    <bean  id = "sixthJob" class ="visi.spring.dependency.injection.Job">
+        <property name="project" ref="cloudMigration"/>
+    </bean>
+
+    <bean  id = "secJob" class ="visi.spring.dependency.injection.SecondJob">
+        <property name="project" ref="cloudMigration"/>
+    </bean>
+
+    <!-- Autowire  using xml-->
+    <!--<bean id="engine" class="visi.spring.autowire.Engine"/>
+
+    <bean id="car" class ="visi.spring.autowire.Vehicle" autowire="byName">
+        &lt;!&ndash;<property name="engine" ref="engineObject"/>&ndash;&gt;
+    </bean>-->
+
+    <!--<bean id="engine" class="visi.spring.autowire.Engine"/>
+
+    <bean id="car" class ="visi.spring.autowire.Vehicle" autowire="constructor">
+        &lt;!&ndash;<property name="engine" ref="engineObject"/>&ndash;&gt;
+    </bean>-->
+
+   <!-- &lt;!&ndash; Autowire  using annotation&ndash;&gt;
+    <bean id="engine" class="visi.spring.autowire.Engine"/>
+    <bean id="busEngine" class="visi.spring.autowire.Engine"/>
+
+    <bean id="car" class ="visi.spring.autowire.Vehicle" >
+    </bean>-->
+
+    <!-- Autowire  using annotation-->
+    <bean id="carEngine" class="visi.spring.autowire.Engine">
+        <property name="engineName" value="carEngine"></property>
+        <property name="fuelInLitre" value="20"></property>
+    </bean>
+    <bean id="busEngine" class="visi.spring.autowire.Engine">
+        <property name="engineName" value="busEngine"></property>
+        <property name="fuelInLitre" value="30"></property>
+    </bean>
+
+    <bean id="car" class ="visi.spring.autowire.Vehicle" >
+    </bean>
+
+</beans>
+
